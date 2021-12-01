@@ -115,13 +115,9 @@ object Homework :
 
   end `Fermat Numbers`
 
-  /*object `Look-and-say Sequence` :
-    val lookAndSaySequenceElement: Int => BigInt = (n) =>
-      {
+  object `Look-and-say Sequence` :
+    val lookAndSaySequenceElement: Int => BigInt = ???
 
-      }
-
-
-  end `Look-and-say Sequence`*/
+  end `Look-and-say Sequence`
 
 end Homework
