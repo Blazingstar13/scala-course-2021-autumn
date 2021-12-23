@@ -23,7 +23,7 @@ object HomeworkSpecification extends Properties("Homework"):
   }
 
   property("check that rational number is simplified") = forAll { (numer: Int, int: Int) ⇒
-    val denom = abs(int) + 1
+    val denom = abs(int) + 1c
     val rational = Rational(numer, denom)
 
     rational.numer == (numer / gcd(abs(numer), denom)) && rational.denom == (denom / gcd(abs(numer), denom))
@@ -50,28 +50,28 @@ object HomeworkSpecification extends Properties("Homework"):
   }
 
   property("negation") = forAll { (rational: Rational) =>
-    ???
+    -(rational) == Rational(-rational.numer, rational.denom)
   }
 
   property("addition") = forAll { (left: Rational, right: Rational) =>
-    ???
+    (left + right) == (Rational(this.x * this.y * that.y / gcd(this.y, that.y) / this.y + that.x * this.y * that.y / gcd(this.y, that.y) / that.y, this.y * that.y / gcd(this.y, that.y));)
   }
 
   property("subtraction") = forAll { (left: Rational, right: Rational) =>
-    ???
+    (left - right) == Rational(this.x * this.y * that.y / gcd(this.y, that.y) / this.y - that.x * this.y * that.y / gcd(this.y, that.y) / that.y, this.y * that.y / gcd(this.y, that.y));
   }
 
   property("multiplication") = forAll { (left: Rational, right: Rational) =>
-    ???
+    (left * right) == Rational(this.numer * that.numer, this.denom * that.denom)
   }
 
   property("division") = forAll { (left: Rational, numer: Int, denom: Int) =>
     val right = Rational(if numer == 0 then 1 else numer, abs(denom) + 1)
-    ???
+    (left / right) == Rational(this.numer * that.denom, this.denom * that.numer)
   }
 
   property("division by zero") = forAll { (left: Rational, int: Int) =>
-    ???
+    left.denom == 0
   }
 
 end HomeworkSpecification

@@ -34,19 +34,34 @@ object Homework:
       !(this < that)
 
     @targetName("addition")
-    infix def +(that: Rational): Rational = ???
+    infix def +(that: Rational): Rational =
+      val a = gcd(this.numer, that.denom);      // НОД
+      val b = this.denom * that.denom / a;      // НОК
+      val c = this.numer * b / this.denom;      // первый числитель
+      val d = that.numer * b / that.denom;       // второй числитель
+      return Rational(c + d, b);
+
+      //Rational(this.x * this.y * that.y / gcd(this.y, that.y) / this.y + that.x * this.y * that.y / gcd(this.y, that.y) / that.y, this.y * that.y / gcd(this.y, that.y));
 
     @targetName("negation")
-    infix def unary_- : Rational = ???
+    infix def unary_- : Rational =
+      Rational(-this.numer, this.denom)
 
     @targetName("substraction")
-    infix def -(that: Rational): Rational = ???
+    infix def -(that: Rational): Rational =
+      val a = gcd(this.denom, that.denom);      // НОД
+      val b = this.denom * that.denom / a;      // НОК
+      val c = this.numer * b / this.denom;      // первый числитель
+      val d = that.numer * b / that.denom;       // второй числитель
+      return Rational(c - d, b);
 
     @targetName("multiplication")
-    infix def *(that: Rational): Rational = ???
+    infix def *(that: Rational): Rational =
+      Rational(this.numer * that.numer, this.denom * that.denom)
 
     @targetName("devision")
-    infix def /(that: Rational): Rational = ???
+    infix def /(that: Rational): Rational =
+      Rational(this.numer * that.denom, this.denom * that.numer)
 
     override def toString: String = s"${this.numer}/${this.denom}"
 
@@ -55,7 +70,14 @@ object Homework:
 
     private lazy val g = gcd(abs(x), y)
 
-    override def equals(other: Any): Boolean = ???
+    override def equals(other: Any): Boolean =
+      if (other.getClass == Rational)
+        if (this.numer == other.numer)
+          this.denom == other.denom
+        else
+          false
+      else
+        false
 
   end Rational
 
