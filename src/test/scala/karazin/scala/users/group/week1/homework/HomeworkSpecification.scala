@@ -26,6 +26,20 @@ object BooleanOperatorsSpecification extends Properties("Boolean Operators"):
     and(left, right) == (left && right)
   }
 
+  // Call by name
+  property("orCBN") = propBoolean {
+    or(true, throw Exception("Should be thrown in or")) == true
+  }
+
+  // Call by name
+  property("andCBN") = propBoolean {
+    and(false, throw Exception("Should be thrown in and")) == false
+  }
+
+  property("equals to Empty") = propBoolean {
+    and(???, throw Exception("Should be thrown in and")) == ???
+  }
+
   property("or") = forAll { (pair: (Boolean, Boolean)) =>
     val (left, right) = pair
     
