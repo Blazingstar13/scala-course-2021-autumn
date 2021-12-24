@@ -35,11 +35,10 @@ object Homework:
 
     @targetName("addition")
     infix def +(that: Rational): Rational =
-      val a = gcd(this.numer, that.denom);      // НОД
-      val b = this.denom * that.denom / a;      // НОК
-      val c = this.numer * b / this.denom;      // первый числитель
-      val d = that.numer * b / that.denom;       // второй числитель
-      return Rational(c + d, b);
+      val nok = this.denom * that.denom / g;                // НОК
+      val first_numer = this.numer * nok / this.denom;      // первый числитель
+      val second_numer = that.numer * nok / that.denom;     // второй числитель
+      return Rational(first_numer + second_numer, nok);
 
       //Rational(this.x * this.y * that.y / gcd(this.y, that.y) / this.y + that.x * this.y * that.y / gcd(this.y, that.y) / that.y, this.y * that.y / gcd(this.y, that.y));
 
@@ -49,11 +48,10 @@ object Homework:
 
     @targetName("substraction")
     infix def -(that: Rational): Rational =
-      val a = gcd(this.denom, that.denom);      // НОД
-      val b = this.denom * that.denom / a;      // НОК
-      val c = this.numer * b / this.denom;      // первый числитель
-      val d = that.numer * b / that.denom;       // второй числитель
-      return Rational(c - d, b);
+      val nok = this.denom * that.denom / g;                // НОК
+      val first_numer = this.numer * nok / this.denom;      // первый числитель
+      val second_numer = that.numer * nok / that.denom;     // второй числитель
+      return Rational(first_numer - second_numer, nok);
 
     @targetName("multiplication")
     infix def *(that: Rational): Rational =
@@ -78,6 +76,11 @@ object Homework:
           false
       else
         false
+
+      override def hashCode() = {
+        val result = 42
+        return result + 4 * numer + 2 * denom
+      }
 
   end Rational
 

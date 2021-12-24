@@ -71,7 +71,9 @@ object HomeworkSpecification extends Properties("Homework"):
   }
 
   property("division by zero") = forAll { (left: Rational, int: Int) =>
-    left.denom == 0
+    throws(classOf[IllegalArgumentException]) {
+      int == 0
+    }
   }
 
 end HomeworkSpecification
