@@ -28,16 +28,12 @@ object BooleanOperatorsSpecification extends Properties("Boolean Operators"):
 
   // Call by name
   property("orCBN") = propBoolean {
-    or(true, throw Exception("Should be thrown in or")) == true
+    or(true, throw Exception("Should be not thrown in or")) == true
   }
 
   // Call by name
   property("andCBN") = propBoolean {
-    and(false, throw Exception("Should be thrown in and")) == false
-  }
-
-  property("equals to Empty") = propBoolean {
-    and(???, throw Exception("Should be thrown in and")) == ???
+    and(false, throw Exception("Should not be thrown in and")) == false
   }
 
   property("or") = forAll { (pair: (Boolean, Boolean)) =>
