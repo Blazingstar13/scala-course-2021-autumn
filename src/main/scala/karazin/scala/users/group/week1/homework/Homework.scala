@@ -56,7 +56,7 @@ object Homework :
       else
         false
 
-    def or(left: Boolean, right: Boolean): Boolean =
+    def or(left: Boolean, right: => Boolean): Boolean =
       if (left)
           true
       else

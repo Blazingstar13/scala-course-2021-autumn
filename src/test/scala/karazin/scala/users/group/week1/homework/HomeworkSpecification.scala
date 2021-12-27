@@ -28,7 +28,7 @@ object BooleanOperatorsSpecification extends Properties("Boolean Operators"):
 
   // Call by name
   property("orCBN") = propBoolean {
-    or(true, throw Exception("Should be not thrown in or")) == true
+    or(true, throw Exception("Should not be thrown in or")) == true
   }
 
   // Call by name
