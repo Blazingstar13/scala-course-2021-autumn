@@ -9,7 +9,7 @@ object HomeworkSpecification extends Properties("Homework"):
 
   include(BooleanOperatorsSpecification)
   include(FermatNumbersSpecification)
-  include(LookAndAaSequenceSpecification)
+  //include(LookAndAaSequenceSpecification)
 
 end HomeworkSpecification
 
@@ -23,7 +23,17 @@ object BooleanOperatorsSpecification extends Properties("Boolean Operators"):
   property("and") = forAll { (pair: (Boolean, Boolean)) =>
     val (left, right) = pair
     
-    and(left, right) == left && right
+    and(left, right) == (left && right)
+  }
+
+  // Call by name
+  property("orCBN") = propBoolean {
+    or(true, throw Exception("Should not be thrown in or")) == true
+  }
+
+  // Call by name
+  property("andCBN") = propBoolean {
+    and(false, throw Exception("Should not be thrown in and")) == false
   }
 
   property("or") = forAll { (pair: (Boolean, Boolean)) =>
@@ -48,16 +58,16 @@ object FermatNumbersSpecification extends Properties("Fermat Numbers"):
 
   property("fermatNumber") = forAll { (n: Int) =>
     fermatNumber(n) == Math.pow(2, Math.pow(2, 2)) + 1
-  }  
+  }
 
 end FermatNumbersSpecification
 
-object LookAndAaSequenceSpecification extends Properties("Look-and-say Sequence"):
-  import `Look-and-say Sequence`._
-  import arbitraries.given Arbitrary[Int]
+//object LookAndAaSequenceSpecification extends Properties("Look-and-say Sequence"):
+  //import `Look-and-say Sequence`._
+  //import arbitraries.given Arbitrary[Int]
 
-  property("fermatNumber") = forAll { (n: Int) =>
-    lookAndSaySequenceElement(n) == 42
-  }  
+  //property("fermatNumber") = forAll { (n: Int) =>
+    //lookAndSaySequenceElement(n) == 42
+  //}
 
-end LookAndAaSequenceSpecification
+//end LookAndAaSequenceSpecification
