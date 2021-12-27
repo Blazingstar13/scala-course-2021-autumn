@@ -35,12 +35,7 @@ object Homework:
 
     @targetName("addition")
     infix def +(that: Rational): Rational =
-      val nok = this.denom * that.denom / g;                // НОК
-      val first_numer = this.numer * nok / this.denom;      // первый числитель
-      val second_numer = that.numer * nok / that.denom;     // второй числитель
-      return Rational(first_numer + second_numer, nok);
-
-      //Rational(this.x * this.y * that.y / gcd(this.y, that.y) / this.y + that.x * this.y * that.y / gcd(this.y, that.y) / that.y, this.y * that.y / gcd(this.y, that.y));
+      Rational(this.numer * that.denom + that.numer * this.denom, this.denom * that.denom)
 
     @targetName("negation")
     infix def unary_- : Rational =
@@ -48,18 +43,20 @@ object Homework:
 
     @targetName("substraction")
     infix def -(that: Rational): Rational =
-      val nok = this.denom * that.denom / g;                // НОК
-      val first_numer = this.numer * nok / this.denom;      // первый числитель
-      val second_numer = that.numer * nok / that.denom;     // второй числитель
-      return Rational(first_numer - second_numer, nok);
+      Rational(this.numer * that.denom - that.numer * this.denom, this.denom * that.denom)
 
     @targetName("multiplication")
     infix def *(that: Rational): Rational =
       Rational(this.numer * that.numer, this.denom * that.denom)
 
     @targetName("devision")
-    infix def /(that: Rational): Rational =
-      Rational(this.numer * that.denom, this.denom * that.numer)
+    infix def /(that: Rational): Rational = {
+      require(that.numer != 0," Denom is equal to zero")                          // проверка 0
+      if (that.numer < 0)                                                         // меньше 0
+        Rational((-1) * this.numer * that.denom, abs(this.denom * that.numer))
+      else
+        Rational(this.numer * that.denom, this.denom * that.numer)
+    }
 
     override def toString: String = s"${this.numer}/${this.denom}"
 
@@ -69,18 +66,14 @@ object Homework:
     private lazy val g = gcd(abs(x), y)
 
     override def equals(other: Any): Boolean =
-      if (other.getClass == Rational)
-        if (this.numer == other.numer)
-          this.denom == other.denom
-        else
-          false
-      else
-        false
-
-      override def hashCode() = {
-        val result = 42
-        return result + 4 * numer + 2 * denom
+      other match {                                                                         // проверяем значения
+        case that: Rational =>  (this.denom == that.denom) && (this.numer == that.numer)    // возможное значение
+        case _ => false                                                                     // остальные
       }
+    override def hashCode() = {
+      val result = 42
+      return result + 4 * numer + 2 * denom
+    }
 
   end Rational
 
